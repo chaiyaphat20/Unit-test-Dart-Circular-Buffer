@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('circular-buffer', () {
-    test('1 : ถ้าสร้าง circular-buffer count จะต้องเท่ากับ 0', () {
+    test('1 : ถ้าสร้าง circular-buffer count จะต้องเท่ากับ 0 ', () {
       // arrange
       int expectedValue = 0;
       CircularBuffer circularBuffer = CircularBuffer();
