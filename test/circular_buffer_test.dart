@@ -17,7 +17,7 @@ void main() {
 
     test('1.1 : ถ้าสร้าง circular-buffer, default capacity ต้องเท่ากับ 3', () {
       // arrange
-      int expectedValue = 5;
+      int expectedValue = 3;
       CircularBuffer circularBuffer = CircularBuffer();
 
       // act
@@ -35,7 +35,7 @@ void main() {
       CircularBuffer circularBuffer = CircularBuffer();
 
       // act
-      int actualValue = circularBuffer.cap();
+      int actualValue = circularBuffer.cap(input: 2);
 
       // assert
       expect(actualValue, expectedValue);
@@ -98,30 +98,30 @@ void main() {
     test(
         '4.1 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 และ 2, เมื่อทำการ read, count ต้องเท่ากับ 1',
         () {
-          int expectedValue = 1;
-          CircularBuffer circularBuffer = CircularBuffer();
+      int expectedValue = 1;
+      CircularBuffer circularBuffer = CircularBuffer();
 
-          circularBuffer.put(1);
-          circularBuffer.put(2);
-          circularBuffer.read();
-          int actualValue = circularBuffer.count();
+      circularBuffer.put(1);
+      circularBuffer.put(2);
+      circularBuffer.read();
+      int actualValue = circularBuffer.count();
 
-          expect(actualValue, expectedValue);
-        });
+      expect(actualValue, expectedValue);
+    });
 
     test(
         '5 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 และ 2, เมื่อทำการ read ครั้งที่ 2 , value ต้องเท่ากับ 2',
         () {
-          int expectedValue = 2;
-          CircularBuffer circularBuffer = CircularBuffer();
+      int expectedValue = 2;
+      CircularBuffer circularBuffer = CircularBuffer();
 
-          circularBuffer.put(1);
-          circularBuffer.put(2);
-          circularBuffer.read();
-          int actualValue = circularBuffer.read();
+      circularBuffer.put(1);
+      circularBuffer.put(2);
+      circularBuffer.read();
+      int actualValue = circularBuffer.read();
 
-          expect(actualValue, expectedValue);
-        });
+      expect(actualValue, expectedValue);
+    });
 
     test(
         '7 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 ,2 และ 3, เมื่อทำการ read ครั้งที่ 1 ,push 4 เข้าไป และ read 3 ครั้ง, value ต้องเท่ากับ 4',
