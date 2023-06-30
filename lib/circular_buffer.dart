@@ -20,6 +20,8 @@ class CircularBuffer {
 
   int read() {
     --_count;
-    return _list[_indexRead];
+    int result = _list[_indexRead];
+    _indexRead++;
+    return result;
   }
 }
