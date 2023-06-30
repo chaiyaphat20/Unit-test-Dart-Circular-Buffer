@@ -68,7 +68,19 @@ void main() {
     });
     test(
         '3.1 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 2, เมื่อทำการ read ไปหนึ่งครั้ง, count ต้องเท่ากับ 0',
-        () {});
+        () {
+          // arrange
+      int expectedValue = 0;
+      CircularBuffer circularBuffer = CircularBuffer();
+
+      // act
+      circularBuffer.put(2);
+      circularBuffer.read();
+      int actualValue = circularBuffer.count();
+
+      // assert
+      expect(actualValue, expectedValue);
+        });
 
     test(
         '4 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 และ 2, เมื่อทำการ read ต้องเท่ากับ 1',

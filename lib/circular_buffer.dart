@@ -6,11 +6,7 @@ class CircularBuffer {
   late List<int> _list = List.generate(_capacity, (index) => 0);
 
   int count() {
-    int totalValue = 0;
-
-    totalValue = _list.where((element) => element != 0).length;
-
-    return totalValue;
+    return _count;
   }
 
   int cap() {
@@ -19,9 +15,11 @@ class CircularBuffer {
 
   void put(int value) {
     _list[_indexWrite++] = value;
+    ++_count;
   }
 
   int read() {
+    --_count;
     return _list[_indexRead];
   }
 }
