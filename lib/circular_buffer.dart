@@ -10,6 +10,7 @@ class CircularBuffer {
   }
 
   int cap({int input = 0}) {
+    _list = List.generate(_capacity + input, (index) => 0);
     return _capacity + input;
   }
 

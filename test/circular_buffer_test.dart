@@ -125,7 +125,22 @@ void main() {
 
     test(
         '7 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 ,2 และ 3, เมื่อทำการ read ครั้งที่ 1 ,push 4 เข้าไป และ read 3 ครั้ง, value ต้องเท่ากับ 4',
-        () {});
+        () {
+      int expectedValue = 4;
+      CircularBuffer circularBuffer = CircularBuffer();
+
+      circularBuffer.cap(input: 2);
+      circularBuffer.put(1);
+      circularBuffer.put(2);
+      circularBuffer.put(3);
+      circularBuffer.read();
+      circularBuffer.put(4);
+      circularBuffer.read();
+      circularBuffer.read();
+      int actualValue = circularBuffer.read();
+
+      expect(actualValue, expectedValue);
+    });
 
     test(
         '8 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 ,2 , 3 ,4  และ 5, เมื่อทำการ read ครั้งที่ 1 , value ต้องเท่ากับ 3 เมื่อ capacity = 4',
