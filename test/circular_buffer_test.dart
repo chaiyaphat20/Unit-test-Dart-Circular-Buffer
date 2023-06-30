@@ -18,10 +18,10 @@ void main() {
     test('1.1 : ถ้าสร้าง circular-buffer, default capacity ต้องเท่ากับ 3', () {
       // arrange
       int expectedValue = 3;
-      CircularBuffer circularBuffer = CircularBuffer();
+      CircularBuffer circularBuffer = CircularBuffer(capacity: 3);
 
       // act
-      int actualValue = circularBuffer.cap();
+      int actualValue = circularBuffer.capacity();
 
       // assert
       expect(actualValue, expectedValue);
@@ -32,10 +32,10 @@ void main() {
         () {
       // arrange
       int expectedValue = 5;
-      CircularBuffer circularBuffer = CircularBuffer();
+      CircularBuffer circularBuffer = CircularBuffer(capacity: 5);
 
       // act
-      int actualValue = circularBuffer.cap(input: 2);
+      int actualValue = circularBuffer.capacity();
 
       // assert
       expect(actualValue, expectedValue);
@@ -129,24 +129,47 @@ void main() {
       int expectedValue = 4;
       CircularBuffer circularBuffer = CircularBuffer();
 
-      circularBuffer.cap(input: 2);
-      circularBuffer.put(1);
-      circularBuffer.put(2);
-      circularBuffer.put(3);
-      circularBuffer.read();
-      circularBuffer.put(4);
-      circularBuffer.read();
-      circularBuffer.read();
-      int actualValue = circularBuffer.read();
+      circularBuffer.put(1); // [1,_,_]
+      circularBuffer.put(2); // [1,2,_]
+      circularBuffer.put(3); // [1,2,3]
+      circularBuffer.read(); // -> 1 // [_,2,3]
+      circularBuffer.put(4); // [4,2,3]
+      circularBuffer.read(); // -> 2 // [4,_,3]
+      circularBuffer.read(); // -> 3 // [4,_,_]
+      int actualValue = circularBuffer.read(); // -> 4 // [_,_,_]
 
       expect(actualValue, expectedValue);
     });
 
     test(
         '8 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 ,2 , 3 ,4  และ 5, เมื่อทำการ read ครั้งที่ 1 , value ต้องเท่ากับ 3 เมื่อ capacity = 4',
-        () {});
+        () {
+      int expectedValue = 2;
+      CircularBuffer circularBuffer = CircularBuffer(capacity: 4);
+
+      circularBuffer.put(1); // [1,_,_,_]
+      circularBuffer.put(2); // [1,2,_,_]
+      circularBuffer.put(3); // [1,2,3,_]
+      circularBuffer.put(4); // [1,2,3,4]
+      circularBuffer.put(5); // [5,2,3,4] // indexRead = 1
+      int actualValue = circularBuffer.read(); // -> 2 // [5,_,3,4]
+
+      expect(actualValue, expectedValue);
+    });
     test(
         '9 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1 ,2 , 3 และ 4, เมื่อทำการ read ครั้งที่ 1  และ  read ครั้งที่สอง, value ต้องเท่ากับ 2 ',
-        () {});
+        () {
+      int expectedValue = 3;
+      CircularBuffer circularBuffer = CircularBuffer();
+
+      circularBuffer.put(1);
+      circularBuffer.put(2);
+      circularBuffer.put(3);
+      circularBuffer.put(4);
+      circularBuffer.read();
+      int actualValue = circularBuffer.read();
+
+      expect(actualValue, expectedValue);
+    });
   });
 }
