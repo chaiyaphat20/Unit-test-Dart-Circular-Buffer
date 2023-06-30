@@ -17,7 +17,7 @@ void main() {
 
     test('1.1 : ถ้าสร้าง circular-buffer, default capacity ต้องเท่ากับ 3', () {
       // arrange
-      int expectedValue = 3;
+      int expectedValue = 5;
       CircularBuffer circularBuffer = CircularBuffer();
 
       // act
@@ -29,7 +29,17 @@ void main() {
 
     test(
         '1.2 : ถ้าสร้าง circular-buffer with capacity 5, capacity ต้องเท่ากับ 5',
-        () {});
+        () {
+      // arrange
+      int expectedValue = 5;
+      CircularBuffer circularBuffer = CircularBuffer();
+
+      // act
+      int actualValue = circularBuffer.cap();
+
+      // assert
+      expect(actualValue, expectedValue);
+    });
 
     test(
         '2 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 1, count ต้องเท่ากับ 1', () {});
