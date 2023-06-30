@@ -54,7 +54,18 @@ void main() {
       expect(actualValue, expectedValue);
     });
 
-    test('3 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 2, read ต้องเท่ากับ 2', () {});
+    test('3 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 2, read ต้องเท่ากับ 2', () {
+      // arrange
+      int expectedValue = 2;
+      CircularBuffer circularBuffer = CircularBuffer();
+
+      // act
+      circularBuffer.put(2);
+      int actualValue = circularBuffer.read();
+
+      // assert
+      expect(actualValue, expectedValue);
+    });
     test(
         '3.1 : ถ้าสร้าง circular-buffer ใส่ข้อมูล 2, เมื่อทำการ read ไปหนึ่งครั้ง, count ต้องเท่ากับ 0',
         () {});

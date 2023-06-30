@@ -20,4 +20,8 @@ class CircularBuffer {
   void put(int value) {
     _list[_indexWrite++] = value;
   }
+
+  int read() {
+    return _list[_indexRead];
+  }
 }
